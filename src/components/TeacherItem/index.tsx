@@ -1,9 +1,7 @@
 import React from "react";
-
 import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
-
-import './styles.css'
 import api from "../../services/api";
+import './styles.css'
 
 export interface Teacher {
     id: number
@@ -46,7 +44,8 @@ const TeacherItem: React.FunctionComponent<TeacherItemProps> = ({teacher}) => {
                     Preço/hora
                     <strong>R$ {teacher.cost}</strong>
                 </p>
-                <a href={`https://wa.me/${teacher.whatsapp}`} target="_blank" onClick={createNewConnection}>
+                <a href={`https://wa.me/${teacher.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                   onClick={createNewConnection}>
                     <img src={whatsappIcon} alt="WhatsApp"/>
                     Entrar em contato
                 </a>

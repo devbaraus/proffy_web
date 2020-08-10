@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from "react";
-
+import React, {useState} from "react";
 import PageHeader from "../../components/PageHeader";
-
-import "./styles.css"
 import TeacherItem, {Teacher} from "../../components/TeacherItem";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import api from "../../services/api";
+import "./styles.css"
 
 function TeacherList() {
     const [teachers, setTeachers] = useState([])
@@ -14,12 +12,6 @@ function TeacherList() {
     const [subject, setSubject] = useState('')
     const [week_day, setWeekDay] = useState('')
     const [time, setTime] = useState('')
-
-    useEffect(() => {
-        // if (subject && week_day && time) {
-        searchTeachers()
-        // }
-    }, [subject, week_day, time])
 
     function searchTeachers() {
         api.get('classes', {

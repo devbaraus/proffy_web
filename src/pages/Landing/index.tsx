@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
-import './styles.css'
-
-import logoImg from '../../assets/images/logo.svg';
-import landingImg from '../../assets/images/landing.svg';
 import {Link} from "react-router-dom";
+import LogoContainer from "../../components/LogoContainer";
+import landingImg from '../../assets/images/landing.svg';
 import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 import api from "../../services/api";
+import './styles.scss'
 
 function Landing() {
     const [totalConnections, setTotalConnections] = useState(0)
@@ -22,10 +21,7 @@ function Landing() {
     return (
         <div id="page-landing">
             <div id="page-landing-content" className="container">
-                <div className="logo-container">
-                    <img src={logoImg} alt="Proffy"/>
-                    <h2>Sua plataforma de estudos online.</h2>
-                </div>
+                <LogoContainer background={false}/>
 
                 <img src={landingImg} alt="Plataforma de estudos" className="hero-image"/>
 

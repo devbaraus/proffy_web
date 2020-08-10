@@ -1,23 +1,13 @@
-import React, {useContext, useEffect} from "react";
-import {BrowserRouter} from "react-router-dom";
+import React from "react";
 import AppRoutes from "./app.routes";
 import AuthRoutes from "./auth.routes";
-import {AuthProvider, AuthContext} from "../contexts/auth";
+import { useIsSigned } from "../contexts/auth";
 
 const Routes = () => {
-    const {signed} = useContext(AuthContext)
+    return useIsSigned()
+        ? <AppRoutes />
+        : <AuthRoutes />
 
-    return (
-        <BrowserRouter>
-            <AuthProvider>
-                {
-                    signed
-                        ? <AppRoutes/>
-                        : <AuthRoutes/>
-                }
-            </AuthProvider>
-        </BrowserRouter>
-    );
 }
 
 export default Routes;

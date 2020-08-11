@@ -106,7 +106,7 @@
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;now()&apos;</DefaultExpression>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <key id="30" parent="8">
       <ColNames>id</ColNames>
@@ -192,22 +192,36 @@
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="13" name="avatar">
+    <column id="49" parent="13" name="whatsapp">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="50" parent="13" name="whatsapp">
+    <column id="50" parent="13" name="bio">
       <Position>4</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="51" parent="13" name="bio">
+    <column id="51" parent="13" name="email">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="52" parent="13">
+    <column id="52" parent="13" name="password">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="13" name="avatar">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <index id="54" parent="13" name="users_email_unique">
+      <ColNames>email</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="55" parent="13">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

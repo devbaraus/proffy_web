@@ -39,7 +39,7 @@
         a {
           text-decoration: none;
           font: 400 1.2rem Poppins;
-          color: var(--color-text-complement)
+          color: var(--color-text-complement);
         }
       }
 
@@ -90,7 +90,6 @@
     }
   }
 }
-
 
 @media (min-width: 900px) {
   .login-container {

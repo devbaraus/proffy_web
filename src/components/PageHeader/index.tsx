@@ -1,31 +1,36 @@
-import React from "react";
-import {Link} from "react-router-dom";
-import backIcon from "../../assets/images/icons/back.svg";
-import logoImg from "../../assets/images/logo.svg";
-import './styles.css'
+import React, { CSSProperties } from 'react'
+import './styles.scss'
+import TopBarContainer from '../TopBarContainer'
 
 interface PageHeaderProps {
-    title: string;
-    description?: string;
+  title?: string
+  description?: string
+  background?: string
 }
 
-const PageHeader: React.FunctionComponent<PageHeaderProps> = ({title, description, children}) => {
-    return (
-        <header className="page-header">
-            <div className="top-bar-container">
-                <Link to="/">
-                    <img src={backIcon} alt="Voltar"/>
-                </Link>
-                <img src={logoImg} alt="Proffy"/>
-            </div>
-
-            <div className="header-content">
-                <strong>{title}</strong>
-                { description && <p>{description}</p>}
-                {children}
-            </div>
-        </header>
-    );
+const PageHeader: React.FunctionComponent<PageHeaderProps> = ({
+  title,
+  description,
+  background,
+  children,
+}) => {
+  const headerContentStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'contain',
+  }
+  return (
+    <header
+      className="page-header"
+      style={(background as CSSProperties) && headerContentStyle}
+    >
+      <TopBarContainer />
+      <div className="header-content">
+        <strong>{title}</strong>
+        {description && <p>{description}</p>}
+        {children}
+      </div>
+    </header>
+  )
 }
 
-export default PageHeader;
+export default PageHeader

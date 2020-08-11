@@ -10,12 +10,12 @@
     line-height: 2.8rem;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     position: relative;
     width: 2.4rem;
     height: 2.4rem;
     color: var(--color-text-title);
-    border: 1px solid var(--color-box-base);;
+    border: 1px solid var(--color-box-base);
     border-radius: 4px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -28,7 +28,7 @@
 
     &::before {
       position: absolute;
-      content: "";
+      content: '';
       display: block;
       left: 5px;
       width: 8px;

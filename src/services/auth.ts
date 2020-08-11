@@ -1,28 +1,20 @@
-// import axios from 'axios'
+import api from './api'
 
-interface Response {
+export interface Response {
+  data: {
     token: string
     user: {
-        user_id: number
-        name: string
-        email: string
+      id: number
+      name: string
+      email: string
     }
+  }
 }
 
-export function signIn(params?: object): Promise<Response> {
-    return new Promise<Response>(resolve => {
-        setTimeout(() => {
-            resolve({
-                token: 'dagwduwagydwaud',
-                user: {
-                    user_id: 2,
-                    name: 'Bruno de Araujo Alves',
-                    email: 'devbaraus@gmail.com'
-                }
-            })
-        }, 300)
-    })
-    // return axios.get('', {
-    //     params
-    // })
+export function authenticate(params: object): Promise<Response> {
+  return api.post('authenticate', params)
+}
+
+export function register(params: object): Promise<Response> {
+  return api.post('register', params)
 }

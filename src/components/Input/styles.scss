@@ -27,7 +27,7 @@
 
   &:focus-within::after {
     width: calc(100% - 3.2rem);
-    content: "";
+    content: '';
     height: 2px;
     background: var(--color-primary-light);
     position: absolute;

@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333/v1/',
+  baseURL:
+    'https://cors-anywhere.herokuapp.com/https://proffy-apiserver.herokuapp.com/v1/',
 })
 
 export default api

@@ -50,13 +50,13 @@ function GiveClasses() {
         })
         .then((response) => {
           const scheduleItem = response.data
-          return setScheduleItems([...scheduleItems, scheduleItem])
+          return setScheduleItems([scheduleItem, ...scheduleItems])
         })
     }
 
     return setScheduleItems([
-      ...scheduleItems,
       { week_day: '', from: '', to: '' },
+      ...scheduleItems,
     ])
   }
 

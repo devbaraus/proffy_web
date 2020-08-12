@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../server/src/database/database.sqlite</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="proffy@localhost" uuid="71101f42-1c58-4f17-b69c-af3f8b7f8e06">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/proffy</jdbc-url>
+    </data-source>
   </component>
 </project>

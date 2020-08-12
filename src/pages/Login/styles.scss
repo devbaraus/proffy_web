@@ -56,11 +56,17 @@
         outline: 0;
         transition: 0.2s;
         border-radius: 0.8rem;
-        cursor: pointer;
+        cursor: not-allowed;
 
-        &:hover {
+        &.login-submit-active {
           background: var(--color-secundary);
           color: var(--color-button-text);
+          cursor: pointer;
+
+          &:hover {
+            background: var(--color-secundary-dark);
+            color: var(--color-button-text);
+          }
         }
       }
     }

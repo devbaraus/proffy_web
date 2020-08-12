@@ -1,51 +1,45 @@
 import React, { createContext, useState, useEffect } from 'react'
 import * as auth from '../services/auth'
 import api from '../services/api'
-
-export interface UserData {
-  id?: number
-  name?: string
-  surname?: string
-  avatar?: string
-  bio?: string
-  email: string
-  password?: string
-  whatsapp?: string
-}
+import { getProfile, UserData } from '../services/auth'
 
 interface AuthContextData {
   signed: boolean
   user: UserData
+  signIn(params: { password: string; email: string }): Promise<UserData>
 
-  signIn(params: { password: string; email: string }): Promise<void>
   register(params: {
     password: string
     email: string
     name: string
     surname: string
-  }): Promise<void>
-
+  }): Promise<UserData>
   signOut(): void
+  setLocalUser(param: UserData): void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 const AuthProvider: React.FunctionComponent = ({ children }) => {
   const [user, setUser] = useState<UserData | null>(null)
-  const [token, setToken] = useState<string>('')
+
+  function setLocalUser(userData: UserData) {
+    setUser(userData)
+    localStorage.setItem('@proffy:user', JSON.stringify(userData))
+  }
+
+  function setLocalToken(tokenData: string) {
+    // setToken(tokenData)
+    api.defaults.headers['Authorization'] = `Bearer ${tokenData}`
+    localStorage.setItem('@proffy:token', JSON.stringify(tokenData))
+  }
 
   async function signIn(params: { email: string; password: string }) {
     const response = (await auth.authenticate(params)).data
-
-    setUser(response.user)
-    setToken(response.token)
-
-    api.defaults.headers['Authorization'] = `Bearer ${response.token}`
-
-    console.log(token, api.defaults.headers['Authorization'])
-
-    localStorage.setItem('@proffy:user', JSON.stringify(response.user))
-    localStorage.setItem('@proffy:token', JSON.stringify(response.token))
+    if (response) {
+      setLocalToken(response.token)
+      setLocalUser(response.user)
+    }
   }
 
   function signOut() {
@@ -63,13 +57,8 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   }) {
     const response = (await auth.register(params)).data
 
-    setUser(response.user)
-    setToken(response.token)
-
-    api.defaults.headers['Authorization'] = `Bearer ${response.token}`
-
-    localStorage.setItem('@proffy:user', JSON.stringify(response.user))
-    localStorage.setItem('@proffy:token', JSON.stringify(response.token))
+    setLocalToken(response.token)
+    setLocalUser(response.user)
   }
 
   useEffect(() => {
@@ -80,17 +69,30 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
       localStorage.getItem('@proffy:token') as string,
     )
 
-    if (storedUser && storedToken) {
+    if (storedUser && storedToken && !user) {
       setUser(storedUser)
-      setToken(storedToken)
+      // setToken(storedToken)
       api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
+    } else if (user) {
+      getProfile().then((response) => {
+        setLocalUser(response.data.user)
+      })
     }
   }, [])
 
   return (
     <AuthContext.Provider
-      // @ts-ignore
-      value={{ signed: !!user, user, signIn, signOut, register }}
+      value={{
+        signed: !!user,
+        // @ts-ignore
+        user,
+        // @ts-ignore
+        signIn,
+        signOut,
+        // @ts-ignore
+        register,
+        setLocalUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

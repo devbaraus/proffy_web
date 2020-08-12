@@ -60,6 +60,7 @@ button,
 textarea {
   font: 400 1.6rem Poppins;
   color: var(--color-text-base);
+  outline: none;
 }
 
 .container {

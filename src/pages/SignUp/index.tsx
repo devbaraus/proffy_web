@@ -3,11 +3,9 @@ import Input from '../../components/Input'
 import WrapperContent from '../../components/WrapperContent'
 import LogoContainer from '../../components/LogoContainer'
 import './styles.scss'
-import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth'
 
 function SignUp() {
-  const history = useHistory()
   const { register } = useContext(AuthContext)
 
   const [name, setName] = useState<string>('')
@@ -17,14 +15,18 @@ function SignUp() {
 
   async function handleCreateUser(e: FormEvent) {
     e.preventDefault()
-    if (name !== '' && surname !== '' && email !== '' && password !== '') {
+    if (isAble()) {
       await register({ name, email, password, surname })
-      history.push('/')
+      window.location.href = '/'
     }
   }
 
+  function isAble() {
+    return name !== '' && surname !== '' && email !== '' && password !== ''
+  }
+
   return (
-    <div id="page-login">
+    <div id="page-signup">
       <WrapperContent className="page-content-left">
         <LogoContainer />
         <div className="signup-container">
@@ -74,7 +76,11 @@ function SignUp() {
                   setPassword(e.target.value)
                 }}
               />
-              <button className="login-submit" type="submit">
+              <button
+                className={`login-submit ${isAble() && 'login-submit-active'}`}
+                disabled={!isAble()}
+                type="submit"
+              >
                 Concluir cadastro
               </button>
             </fieldset>

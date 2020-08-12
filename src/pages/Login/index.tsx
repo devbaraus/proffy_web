@@ -1,23 +1,27 @@
-import React, { useContext, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { FormEvent, useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import WrapperContent from '../../components/WrapperContent'
 import LogoContainer from '../../components/LogoContainer'
 import Input from '../../components/Input'
-import Check from '../../components/Check'
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg'
 import { AuthContext } from '../../contexts/auth'
 import './styles.scss'
 
 function Login() {
-  const history = useHistory()
   const { signIn } = useContext(AuthContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  async function handleSignIn(e: React.MouseEvent) {
+  async function handleSignIn(e: FormEvent) {
     e.preventDefault()
-    await signIn({ email, password })
-    history.push('/')
+    if (isAble()) {
+      await signIn({ email, password })
+      window.location.href = '/'
+    }
+  }
+
+  function isAble() {
+    return email !== '' && password !== ''
   }
 
   return (
@@ -25,7 +29,7 @@ function Login() {
       <WrapperContent className="page-content-right">
         <LogoContainer />
         <div className="login-container">
-          <form className="form-80">
+          <form className="form-80" onSubmit={(e) => handleSignIn(e)}>
             <fieldset>
               <legend>
                 <p>Fazer login</p>
@@ -51,12 +55,12 @@ function Login() {
                 }}
               />
               <div className="login-tools">
-                <Check label="Lembrar-me" name="remind" />
+                <div />
                 <Link to="/forgot-password">Esqueci minha senha</Link>
               </div>
               <button
-                onClick={handleSignIn}
-                className="login-submit"
+                className={`login-submit ${isAble() && 'login-submit-active'}`}
+                disabled={!isAble()}
                 type="submit"
               >
                 Entrar

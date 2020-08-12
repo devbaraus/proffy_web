@@ -70,51 +70,52 @@
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="7" name="cost">
+    <column id="23" parent="7" name="summary">
       <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="7" name="cost">
+      <Position>4</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="7" name="user_id">
-      <Position>4</Position>
+    <column id="25" parent="7" name="user_id">
+      <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="25" parent="7">
+    <key id="26" parent="7">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="26" parent="7">
+    <foreign-key id="27" parent="7">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="27" parent="8" name="id">
+    <column id="28" parent="8" name="user_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="28" parent="8" name="user_id">
+    <column id="29" parent="8" name="class_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="8" name="created_at">
-      <Position>3</Position>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <key id="30" parent="8">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="31" parent="8">
+    <foreign-key id="30" parent="8">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="31" parent="8">
+      <ColNames>class_id</ColNames>
+      <RefTableName>classes</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
@@ -192,36 +193,45 @@
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="13" name="whatsapp">
+    <column id="49" parent="13" name="surname">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="50" parent="13" name="bio">
+    <column id="50" parent="13" name="whatsapp">
       <Position>4</Position>
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="51" parent="13" name="email">
-      <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="52" parent="13" name="password">
+    <column id="51" parent="13" name="bio">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="52" parent="13" name="email">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="53" parent="13" name="avatar">
+    <column id="53" parent="13" name="password">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <index id="54" parent="13" name="users_email_unique">
+    <column id="54" parent="13" name="avatar">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="55" parent="13" name="created_at">
+      <Position>9</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="56" parent="13" name="users_email_unique">
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="55" parent="13">
+    <key id="57" parent="13">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

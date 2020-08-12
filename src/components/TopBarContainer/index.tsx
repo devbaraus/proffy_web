@@ -9,10 +9,12 @@ import { AuthContext } from '../../contexts/auth'
 
 interface TopBarContainerProps {
   profile?: boolean
+  title?: string
 }
 
 const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
   profile = false,
+  title,
 }) => {
   const { signOut, user } = useContext(AuthContext)
 
@@ -21,19 +23,14 @@ const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
   }
 
   return (
-    <div className="holder-top-bar">
+    <div className={`holder-top-bar ${!profile && 'holder-dark'}`}>
       {profile ? (
         <div className="top-bar-container">
           <Link to="/profile" className="profile-button">
-            <img
-              src={
-                user.avatar ||
-                'https://api.adorable.io/avatars/285/abott@adorable.png'
-              }
-              alt="Perfil"
-            />
+            <img src={user.avatar} alt="Perfil" />
             <p>{[user.name, user.surname].join(' ')}</p>
           </Link>
+          <p>{title}</p>
           <img onClick={(e) => handleSignOut()} src={leaveIcon} alt="Sair" />
         </div>
       ) : (
@@ -41,6 +38,8 @@ const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
           <Link to="/">
             <img src={backIcon} alt="Voltar" />
           </Link>
+          <p>{title}</p>
+
           <img src={logoImg} alt="Proffy" />
         </div>
       )}

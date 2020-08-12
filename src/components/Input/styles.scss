@@ -25,6 +25,11 @@
     font: 1.6rem Archivo;
   }
 
+  input[disabled] {
+    background: none;
+    border: none;
+  }
+
   &:focus-within::after {
     width: calc(100% - 3.2rem);
     content: '';

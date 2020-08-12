@@ -161,7 +161,7 @@ function GiveClasses() {
           history.push('/give-classes')
         })
     }
-  }, [])
+  }, [classID, history])
 
   function handleDeleteClass() {
     api

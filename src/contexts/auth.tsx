@@ -78,7 +78,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         setLocalUser(response.data.user)
       })
     }
-  }, [])
+  }, [user])
 
   return (
     <AuthContext.Provider

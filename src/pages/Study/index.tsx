@@ -36,14 +36,18 @@ function Study() {
       })
   }
 
-  useEffect(() => {
-    searchClasses()
-    if (storedSubjects.length === 0) {
-      api.get('subjects').then((response) => {
-        setStoredSubjects(response.data)
-      })
-    }
-  }, [subject, week_day, time])
+  useEffect(
+    () => {
+      searchClasses()
+      if (storedSubjects.length === 0) {
+        api.get('subjects').then((response) => {
+          setStoredSubjects(response.data)
+        })
+      }
+    },
+    // eslint-disable-next-line
+    [subject, week_day, time, storedSubjects.length],
+  )
 
   return (
     <div id="page-teacher-list" className="container">

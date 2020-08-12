@@ -6,6 +6,7 @@ export function findSubjectName(id: number, array: SubjectInterface[]) {
     if (item.id === id) {
       label = item.name
     }
+    return item
   })
   return label
 }

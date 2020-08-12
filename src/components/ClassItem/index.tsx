@@ -20,7 +20,7 @@ const ClassItem: React.FunctionComponent<ClassItemProps> = ({
   classesLabel,
 }) => {
   function createNewConnection() {
-    api.post('connections')
+    api.post('connections').then()
   }
   const { user } = useContext(AuthContext)
   return (
@@ -45,7 +45,7 @@ const ClassItem: React.FunctionComponent<ClassItemProps> = ({
               to={`/give-classes?edit=${classItem.id}`}
               className="class-edit"
             >
-              <img src={editIcon} />
+              <img src={editIcon} alt="edit" />
             </Link>
           )
         }

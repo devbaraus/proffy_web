@@ -39,6 +39,7 @@ function Profile() {
         reader.readAsDataURL(el.files[0])
 
         uploadAvatar({ image: el.files[0] }).then(() => {
+          window.alert('Avatar atualizado!')
           getProfile().then((response) => {
             const { email, name, surname, avatar, id } = response.data.user
             setLocalUser({ email, name, surname, avatar, id })
@@ -88,7 +89,7 @@ function Profile() {
                 <img src={avatar || adorableImage(name)} alt="avatar" />
                 <img
                   src={cameraIcon}
-                  alt="Icone Camera"
+                  alt="Ícone Camera"
                   className="camera-icon"
                   onClick={(e) => {
                     handleUploadAvatar()

@@ -13,5 +13,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/proffy</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Elephant" uuid="8f5208ab-70d3-481b-844b-f1aae24830cf">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://raja.db.elephantsql.com/boplsgeq</jdbc-url>
+    </data-source>
   </component>
 </project>

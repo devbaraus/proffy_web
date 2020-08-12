@@ -44,7 +44,7 @@ function GiveClasses() {
 
   async function addNewScheduleItem() {
     if (!!classID) {
-      api
+      return api
         .post('/class-schedule', {
           class_id: classID,
         })
@@ -119,14 +119,14 @@ function GiveClasses() {
     if (scheduleItems.length > 1) {
       if (!!classID) {
         let initialSchedule = [...scheduleItems]
-        api
+        return api
           .delete('/class-schedule', {
             params: {
               // @ts-ignore
               id: initialSchedule[index]['id'],
             },
           })
-          .then((response) => {
+          .then(() => {
             initialSchedule.splice(index, 1)
             return setScheduleItems(initialSchedule)
           })
@@ -157,7 +157,7 @@ function GiveClasses() {
           setCost(classItem.cost)
           setScheduleItems(classItem.schedules)
         })
-        .catch((err) => {
+        .catch(() => {
           history.push('/give-classes')
         })
     }
@@ -170,7 +170,7 @@ function GiveClasses() {
           id: classID,
         },
       })
-      .then((response) => {
+      .then(() => {
         window.alert('Aula deletada')
         history.push('/')
       })
@@ -311,7 +311,7 @@ function GiveClasses() {
                   </div>
                   <div className="schedule-item-delete">
                     <hr />
-                    <span onClick={(e) => handleDeleteClassSchedule(index)}>
+                    <span onClick={() => handleDeleteClassSchedule(index)}>
                       Excluir horário
                     </span>
                     <hr />

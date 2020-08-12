@@ -61,24 +61,28 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     setLocalUser(response.user)
   }
 
-  useEffect(() => {
-    const storedUser = JSON.parse(
-      localStorage.getItem('@proffy:user') as string,
-    )
-    const storedToken = JSON.parse(
-      localStorage.getItem('@proffy:token') as string,
-    )
+  useEffect(
+    () => {
+      const storedUser = JSON.parse(
+        localStorage.getItem('@proffy:user') as string,
+      )
+      const storedToken = JSON.parse(
+        localStorage.getItem('@proffy:token') as string,
+      )
 
-    if (storedUser && storedToken && !user) {
-      setUser(storedUser)
-      // setToken(storedToken)
-      api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
-    } else if (user) {
-      getProfile().then((response) => {
-        setLocalUser(response.data.user)
-      })
-    }
-  }, [user])
+      if (storedUser && storedToken && !user) {
+        setUser(storedUser)
+        // setToken(storedToken)
+        api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
+      } else if (user) {
+        getProfile().then((response) => {
+          setLocalUser(response.data.user)
+        })
+      }
+    },
+    // eslint-disable-next-line
+    [],
+  )
 
   return (
     <AuthContext.Provider

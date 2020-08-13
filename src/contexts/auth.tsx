@@ -75,9 +75,14 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         // setToken(storedToken)
         api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
       } else if (user) {
-        getProfile().then((response) => {
-          setLocalUser(response.data.user)
-        })
+        getProfile()
+          .then((response) => {
+            setLocalUser(response.data.user)
+          })
+          .catch(() => {
+            signOut()
+          })
+        api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
       }
     },
     // eslint-disable-next-line

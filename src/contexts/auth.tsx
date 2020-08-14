@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import * as auth from '../services/auth'
 import api from '../services/api'
-import { authenticate, UserData } from '../services/auth'
+import { UserData } from '../services/auth'
 import FlashMessage from '../components/FlashMessage'
 
 interface AuthContextData {
@@ -36,8 +36,14 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
             localStorage.getItem('@proffy:refresh_token') as string,
           ),
         })
+      } else if (403 === error.response.status) {
+        emitMessage(
+          'Você não tem permissão para acessar os dados desta página.',
+          'error',
+        )
+      } else if (404 === error.response.status) {
+        emitMessage('Esta página não foi encontrada.', 'error')
       } else {
-        console.error(error)
         return Promise.reject(error)
       }
     },
@@ -47,8 +53,8 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   const [flash, setFlash] = useState<{
     text: string
     type: string
-    time: number
-  }>({ text: '', type: 'success', time: 3000 })
+    time: number | undefined
+  }>({ text: '', type: 'success', time: undefined })
 
   function setLocalUser(userData: UserData) {
     setUser(userData)
@@ -103,11 +109,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     setLocalUser(response.user)
   }
 
-  function emitMessage(
-    text: string,
-    type: string = 'success',
-    time: number = 3000,
-  ) {
+  function emitMessage(text: string, type: string = 'success', time?: number) {
     setFlash({ text, type, time })
   }
 

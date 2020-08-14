@@ -54,6 +54,9 @@ function GiveClasses() {
           const scheduleItem = response.data
           return setScheduleItems([scheduleItem, ...scheduleItems])
         })
+        .catch(() => {
+          emitMessage('Não foi possível adicionar um novo horário.', 'error')
+        })
     }
 
     return setScheduleItems([
@@ -65,7 +68,7 @@ function GiveClasses() {
   function handleCreateOrUpdateClass(e: FormEvent) {
     e.preventDefault()
     if (!validForm()) {
-      return window.alert('Seu formulário de cadastro está incorreto!')
+      emitMessage('Seu formulário de cadastro está incorreto!', 'error')
     }
     if (!classID) {
       api
@@ -95,7 +98,7 @@ function GiveClasses() {
           emitMessage('Sua aula atualizada com sucesso!')
         })
         .catch(() => {
-          alert('Não foi possível atualizar sua aula!')
+          emitMessage('Não foi possível atualizar sua aula!', 'error')
         })
     }
   }
@@ -132,6 +135,9 @@ function GiveClasses() {
             initialSchedule.splice(index, 1)
             return setScheduleItems(initialSchedule)
           })
+          .catch(() => {
+            emitMessage('Não foi possível apagar este horário.', 'error')
+          })
       } else {
         let initialSchedule = [...scheduleItems]
         initialSchedule.splice(index, 1)
@@ -140,30 +146,45 @@ function GiveClasses() {
     }
   }
 
-  useEffect(() => {
-    api.get('subjects').then((response) => {
-      setStoredSubjects(response.data)
-    })
-
-    if (!!classID) {
+  useEffect(
+    () => {
       api
-        .get('classes', {
-          params: {
-            id: classID,
-          },
-        })
+        .get('subjects')
         .then((response) => {
-          const classItem = response.data
-          setSubject(classItem.subject_id)
-          setSummary(classItem.summary)
-          setCost(classItem.cost)
-          setScheduleItems(classItem.schedules)
+          setStoredSubjects(response.data)
         })
-        .catch(() => {
-          history.push('/give-classes')
+        .catch((error) => {
+          if (error.response.status === 403) {
+            emitMessage('Você não tem permissão para acessar essa página.')
+            history.push('/')
+          } else if (error.response.status === 404) {
+            emitMessage('O conteúdo desta página não foi encontrado.')
+            history.push('/')
+          }
         })
-    }
-  }, [classID, history])
+
+      if (!!classID) {
+        api
+          .get('classes', {
+            params: {
+              id: classID,
+            },
+          })
+          .then((response) => {
+            const classItem = response.data
+            setSubject(classItem.subject_id)
+            setSummary(classItem.summary)
+            setCost(classItem.cost)
+            setScheduleItems(classItem.schedules)
+          })
+          .catch(() => {
+            history.push('/give-classes')
+          })
+      }
+    },
+    // eslint-disable-next-line
+    [classID, history],
+  )
 
   function handleDeleteClass() {
     api
@@ -175,6 +196,9 @@ function GiveClasses() {
       .then(() => {
         emitMessage('Sua aula foi apagada!')
         history.push('/')
+      })
+      .catch(() => {
+        emitMessage('Não foi possível apagar esta aula!')
       })
   }
 

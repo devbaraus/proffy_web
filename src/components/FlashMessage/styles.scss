@@ -1,9 +1,11 @@
+$flashsize: 9rem;
+
 #flash-message {
   position: fixed;
   top: 6.6rem;
   right: -100%;
-  height: 8rem;
-  width: 28rem;
+  height: $flashsize;
+  width: calc($flashsize + 20rem);
   z-index: 999;
   display: flex;
   cursor: pointer;
@@ -33,8 +35,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8rem;
-    height: 8rem;
+    width: $flashsize;
+    height: $flashsize;
     background: #fff;
 
     img {

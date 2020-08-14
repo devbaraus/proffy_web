@@ -7,7 +7,7 @@ const FlashMessage: React.FunctionComponent<{
   text: string
   type: string
   time?: number
-}> = ({ text, type = 'error', time = 3000, children }) => {
+}> = ({ text, type = 'error', time = 5000, children }) => {
   const [t, setT] = useState(false)
 
   let timeout: NodeJS.Timeout

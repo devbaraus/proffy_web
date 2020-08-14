@@ -22,6 +22,7 @@ interface ResponseUserData {
 export interface Response {
   data: {
     token: string
+    refresh_token: string
     user: UserData
   }
 }

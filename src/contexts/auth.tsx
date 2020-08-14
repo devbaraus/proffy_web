@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 import * as auth from '../services/auth'
 import api from '../services/api'
-import { getProfile, UserData } from '../services/auth'
+import { authenticate, UserData } from '../services/auth'
+import FlashMessage from '../components/FlashMessage'
 
 interface AuthContextData {
   signed: boolean
@@ -15,36 +16,77 @@ interface AuthContextData {
     surname: string
   }): Promise<UserData>
   signOut(): void
+  emitMessage(text: string, type?: string, time?: number): void
   setLocalUser(param: UserData): void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 const AuthProvider: React.FunctionComponent = ({ children }) => {
+  api.interceptors.response.use(
+    function (response) {
+      return response
+    },
+    async function (error) {
+      if (401 === error.response.status) {
+        signIn({
+          email: '',
+          password: '',
+          refresh_token: JSON.parse(
+            localStorage.getItem('@proffy:refresh_token') as string,
+          ),
+        })
+      } else {
+        console.error(error)
+        return Promise.reject(error)
+      }
+    },
+  )
+
   const [user, setUser] = useState<UserData | null>(null)
+  const [flash, setFlash] = useState<{
+    text: string
+    type: string
+    time: number
+  }>({ text: '', type: 'success', time: 3000 })
 
   function setLocalUser(userData: UserData) {
     setUser(userData)
     localStorage.setItem('@proffy:user', JSON.stringify(userData))
   }
 
-  function setLocalToken(tokenData: string) {
+  function setLocalToken(tokenData: string, refreshTokenData: string) {
     // setToken(tokenData)
     api.defaults.headers['Authorization'] = `Bearer ${tokenData}`
     localStorage.setItem('@proffy:token', JSON.stringify(tokenData))
+    localStorage.setItem(
+      '@proffy:refresh_token',
+      JSON.stringify(refreshTokenData),
+    )
   }
 
-  async function signIn(params: { email: string; password: string }) {
-    const response = (await auth.authenticate(params)).data
-    if (response) {
-      setLocalToken(response.token)
-      setLocalUser(response.user)
-    }
+  async function signIn(params: {
+    email: string
+    password: string
+    refresh_token?: string
+  }) {
+    await auth
+      .authenticate(params)
+      .then((response) => {
+        const { token, refresh_token, user } = response.data
+        setLocalToken(token, refresh_token)
+        setLocalUser(user)
+        api.defaults.headers['Authorization'] = `Bearer ${token}`
+      })
+      .catch(() => {
+        signOut()
+      })
   }
 
   function signOut() {
     localStorage.removeItem('@proffy:user')
     localStorage.removeItem('@proffy:token')
+    localStorage.removeItem('@proffy:refresh_token')
 
     setUser(null)
   }
@@ -57,32 +99,30 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   }) {
     const response = (await auth.register(params)).data
 
-    setLocalToken(response.token)
+    setLocalToken(response.token, response.refresh_token)
     setLocalUser(response.user)
+  }
+
+  function emitMessage(
+    text: string,
+    type: string = 'success',
+    time: number = 3000,
+  ) {
+    setFlash({ text, type, time })
   }
 
   useEffect(
     () => {
-      const storedUser = JSON.parse(
-        localStorage.getItem('@proffy:user') as string,
-      )
       const storedToken = JSON.parse(
         localStorage.getItem('@proffy:token') as string,
       )
 
-      if (storedUser && storedToken && !user) {
-        setUser(storedUser)
-        // setToken(storedToken)
-        api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
-      } else if (user) {
-        getProfile()
-          .then((response) => {
-            setLocalUser(response.data.user)
-          })
-          .catch(() => {
-            signOut()
-          })
-        api.defaults.headers['Authorization'] = `Bearer ${storedToken}`
+      const refresh_token = JSON.parse(
+        localStorage.getItem('@proffy:refresh_token') as string,
+      )
+
+      if (refresh_token && storedToken) {
+        signIn({ email: '', password: '', refresh_token })
       }
     },
     // eslint-disable-next-line
@@ -101,8 +141,10 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         // @ts-ignore
         register,
         setLocalUser,
+        emitMessage,
       }}
     >
+      <FlashMessage text={flash.text} type={flash.type} time={flash.time} />
       {children}
     </AuthContext.Provider>
   )

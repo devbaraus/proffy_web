@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useContext, useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import Input from '../../components/Input'
@@ -8,9 +8,11 @@ import api from '../../services/api'
 import './styles.scss'
 import Textarea from '../../components/Textarea'
 import { ScheduleInterface, SubjectInterface } from '../../interfaces'
+import { AuthContext } from '../../contexts/auth'
 
 function GiveClasses() {
   const history = useHistory()
+  const { emitMessage } = useContext(AuthContext)
 
   function useQuery() {
     return new URLSearchParams(useLocation().search)
@@ -74,11 +76,11 @@ function GiveClasses() {
           schedule: scheduleItems,
         })
         .then(() => {
-          alert('Cadastro feito com sucesso!')
+          emitMessage('Sua aula foi cadastrada!')
           history.push('/')
         })
         .catch(() => {
-          alert('Não foi possível fazer o cadastro!')
+          emitMessage('Não foi possível cadastrar sua aula!', 'error')
         })
     } else {
       api
@@ -90,10 +92,10 @@ function GiveClasses() {
           schedule: scheduleItems,
         })
         .then(() => {
-          alert('Classe atualizada com sucesso!')
+          emitMessage('Sua aula atualizada com sucesso!')
         })
         .catch(() => {
-          alert('Não foi possível fazer a atualização do cadastro!')
+          alert('Não foi possível atualizar sua aula!')
         })
     }
   }
@@ -171,7 +173,7 @@ function GiveClasses() {
         },
       })
       .then(() => {
-        window.alert('Aula deletada')
+        emitMessage('Sua aula foi apagada!')
         history.push('/')
       })
   }

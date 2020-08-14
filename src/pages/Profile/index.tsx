@@ -14,7 +14,7 @@ import { ClassItemInterace, SubjectInterface } from '../../interfaces'
 import ProfileClassItem from '../../components/ProfileClassItem'
 
 function Profile() {
-  const { setLocalUser } = useContext(AuthContext)
+  const { setLocalUser, emitMessage } = useContext(AuthContext)
 
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
@@ -28,7 +28,9 @@ function Profile() {
 
   async function handleUpdateProfile(e: FormEvent) {
     e.preventDefault()
-    await updateProfile({ name, whatsapp, email, bio, surname })
+    await updateProfile({ name, whatsapp, email, bio, surname }).then(() => {
+      emitMessage('Seu perfil foi atualizado!')
+    })
   }
 
   function handleUploadAvatar() {
@@ -44,7 +46,7 @@ function Profile() {
         reader.readAsDataURL(el.files[0])
 
         uploadAvatar({ image: el.files[0] }).then(() => {
-          window.alert('Avatar atualizado!')
+          emitMessage('Seu avatar foi atualizado!')
           getProfile().then((response) => {
             const { email, name, surname, avatar, id } = response.data.user
             setLocalUser({ email, name, surname, avatar, id })
@@ -168,6 +170,14 @@ function Profile() {
               </div>
             </div>
           </fieldset>
+          <footer>
+            <p>
+              <img src={warningIcon} alt="Aviso importante" />
+              Importante! <br />
+              Preencha todos os dados
+            </p>
+            <button type="submit">Salvar cadastro</button>
+          </footer>
           <fieldset>
             <legend>
               Suas aulas
@@ -181,15 +191,6 @@ function Profile() {
               />
             ))}
           </fieldset>
-
-          <footer>
-            <p>
-              <img src={warningIcon} alt="Aviso importante" />
-              Importante! <br />
-              Preencha todos os dados
-            </p>
-            <button type="submit">Salvar cadastro</button>
-          </footer>
         </form>
       </main>
     </div>

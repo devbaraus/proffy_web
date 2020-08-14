@@ -1,5 +1,5 @@
 import React, { FormEvent, useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import WrapperContent from '../../components/WrapperContent'
 import LogoContainer from '../../components/LogoContainer'
 import Input from '../../components/Input'
@@ -9,6 +9,7 @@ import './styles.scss'
 
 function Login() {
   const { signIn } = useContext(AuthContext)
+  const history = useHistory()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -16,7 +17,7 @@ function Login() {
     e.preventDefault()
     if (isAble()) {
       await signIn({ email, password })
-      window.location.href = '/'
+      history.push('/')
     }
   }
 

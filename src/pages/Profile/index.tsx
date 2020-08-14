@@ -174,7 +174,11 @@ function Profile() {
               <Link to="/give-classes">+ Nova aula</Link>
             </legend>
             {classes.map((classItem) => (
-              <ProfileClassItem classesLabel={subjects} classItem={classItem} />
+              <ProfileClassItem
+                key={classItem.id}
+                classesLabel={subjects}
+                classItem={classItem}
+              />
             ))}
           </fieldset>
 

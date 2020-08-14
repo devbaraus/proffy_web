@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 import editIcon from '../../assets/images/icons/edit.svg'
 import api from '../../services/api'

@@ -4,10 +4,8 @@ import WrapperContent from '../../components/WrapperContent'
 import LogoContainer from '../../components/LogoContainer'
 import './styles.scss'
 import { AuthContext } from '../../contexts/auth'
-import { useHistory } from 'react-router-dom'
 
 function SignUp() {
-  const history = useHistory()
   const { register } = useContext(AuthContext)
 
   const [name, setName] = useState<string>('')
@@ -20,9 +18,7 @@ function SignUp() {
     if (isAble()) {
       await register({ name, email, password, surname })
       const msg = `Agora você faz parte da plataforma da Proffy. Tenha uma ótima experiência.`
-      history.push(
-        `/notify?title=Cadastro&msg=${msg}&url=/&text=Página Inicial`,
-      )
+      window.location.href = `/notify?title=Cadastro&msg=${msg}&url=/&text=Página Inicial`
     }
   }
 

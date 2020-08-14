@@ -85,6 +85,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         api.defaults.headers['Authorization'] = `Bearer ${token}`
       })
       .catch(() => {
+        console.log('oidawdw', params)
         signOut()
       })
   }
@@ -114,24 +115,23 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   }
 
   useEffect(
+    // @ts-ignore
     () => {
-      const storedToken = JSON.parse(
-        localStorage.getItem('@proffy:token') as string,
+      setUser(JSON.parse(localStorage.getItem('@proffy:user') as string))
+      setLocalToken(
+        JSON.parse(localStorage.getItem('@proffy:token') as string),
+        JSON.parse(localStorage.getItem('@proffy:refresh_token') as string),
       )
 
-      const refresh_token = JSON.parse(
-        localStorage.getItem('@proffy:refresh_token') as string,
-      )
+      let refresh_token = localStorage.getItem(
+        '@proffy:refresh_token',
+      ) as string
 
-      if (
-        typeof refresh_token != 'undefined' &&
-        refresh_token != null &&
-        typeof storedToken != 'undefined' &&
-        storedToken != null
-      ) {
-        signIn({ email: '', password: '', refresh_token })
-      } else {
+      if (typeof refresh_token === 'undefined' || refresh_token === null) {
         signOut()
+      } else {
+        refresh_token = JSON.parse(refresh_token)
+        signIn({ email: '', password: '', refresh_token }).then()
       }
     },
     // eslint-disable-next-line

@@ -5,7 +5,7 @@ $flashsize: 9rem;
   top: 6.6rem;
   right: -100%;
   height: $flashsize;
-  width: calc($flashsize + 20rem);
+  width: calc(#{$flashsize} + 20rem);
   z-index: 999;
   display: flex;
   cursor: pointer;

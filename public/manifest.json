@@ -5,7 +5,7 @@
   "lang": "pt-BR",
   "start_url": "/?standalone=true",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "theme_color": "#8257e5",
   "background_color": "#774dd6",
   "icons": [

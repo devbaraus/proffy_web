@@ -4,6 +4,7 @@ import logoImg from '../../assets/images/logo.svg'
 import squaredBgImg from '../../assets/images/squared-background.svg'
 
 import './styles.scss'
+import { Link } from 'react-router-dom'
 
 const logoContainerStyle = {
   backgroundImage: `url(${squaredBgImg})`,

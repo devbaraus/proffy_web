@@ -1,4 +1,5 @@
 import api from './api'
+import { ClassItemInterace } from '../interfaces'
 
 export interface UserData {
   id?: number
@@ -14,6 +15,7 @@ export interface UserData {
 interface ResponseUserData {
   data: {
     user: UserData
+    classes?: ClassItemInterace[]
   }
 }
 
@@ -32,8 +34,12 @@ export function register(params: object): Promise<Response> {
   return api.post('register', params)
 }
 
-export function getProfile(): Promise<ResponseUserData> {
-  return api.get('profile')
+export function getProfile(classes?: boolean): Promise<ResponseUserData> {
+  return api.get('profile', {
+    params: {
+      classes: classes ? true : null,
+    },
+  })
 }
 
 export function updateProfile(params: UserData): Promise<ResponseUserData> {

@@ -10,6 +10,13 @@ import backgroundImg from '../../assets/images/success-background.svg'
 import { adorableImage, getProfile, updateProfile } from '../../services/auth'
 import { AuthContext } from '../../contexts/auth'
 import api from '../../services/api'
+import { findSubjectName } from '../../utils'
+import editIcon from '../../assets/images/icons/edit.svg'
+import GridSchedule from '../../components/GridSchedule'
+import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
+import { Teacher } from '../../../../mobile/src/components/TeacherItem'
+import { ClassItemInterace, SubjectInterface } from '../../interfaces'
+import ProfileClassItem from '../../components/ProfileClassItem'
 
 function Profile() {
   const { setLocalUser } = useContext(AuthContext)
@@ -20,6 +27,9 @@ function Profile() {
   const [whatsapp, setWhatsapp] = useState('')
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
+  const [subjects, setSubjects] = useState([] as SubjectInterface[])
+
+  const [classes, setClasses] = useState([] as ClassItemInterace[])
 
   async function handleUpdateProfile(e: FormEvent) {
     e.preventDefault()
@@ -67,8 +77,14 @@ function Profile() {
   }
 
   useEffect(() => {
-    getProfile().then((response) => {
+    api.get('subjects').then((response) => {
+      setSubjects(response.data)
+    })
+
+    getProfile(true).then((response) => {
       const { name, email, avatar, surname, bio, whatsapp } = response.data.user
+
+      const classes = response.data.classes
 
       setName(name as string)
       setSurname(surname as string)
@@ -76,6 +92,7 @@ function Profile() {
       setBio(bio as string)
       setWhatsapp(whatsapp as string)
       setEmail(email as string)
+      setClasses(classes as ClassItemInterace[])
     })
   }, [])
 
@@ -161,7 +178,9 @@ function Profile() {
               Suas aulas
               <Link to="/give-classes">+ Nova aula</Link>
             </legend>
-            <div></div>
+            {classes.map((classItem) => (
+              <ProfileClassItem classesLabel={subjects} classItem={classItem} />
+            ))}
           </fieldset>
 
           <footer>

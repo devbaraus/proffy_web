@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import SignUp from '../pages/SignUp'
 import ForgotPassword from '../pages/ForgotPassword'
 import Notify from '../pages/Notify'
+import ResetPassword from '../pages/ResetPassword'
 
 function AuthRoutes() {
   return (
@@ -13,7 +14,8 @@ function AuthRoutes() {
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
       <Route path="/forgot-password" exact component={ForgotPassword} />
-      <Route path="/success" component={Notify} />
+      <Route path="/reset-password" exact component={ResetPassword} />
+      <Route path="/notify" component={Notify} />
     </BrowserRouter>
   )
 }

@@ -14,7 +14,7 @@ function AppRoutes() {
       <Route path="/study" component={TeacherList} />
       <Route path="/give-classes" component={GiveClasses} />
       <Route path="/profile" component={TeacherProfile} />
-      <Route path="/success" component={Notify} />
+      <Route path="/notify" component={Notify} />
       {/*<Redirect path="*" to="/" />*/}
     </BrowserRouter>
   )

@@ -20,7 +20,7 @@ const ClassItem: React.FunctionComponent<ClassItemProps> = ({
   classesLabel,
 }) => {
   function createNewConnection() {
-    api.post('connections').then()
+    api.post('connections', { class_id: classItem.id }).then()
   }
   const { user } = useContext(AuthContext)
   return (

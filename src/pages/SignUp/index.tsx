@@ -17,7 +17,8 @@ function SignUp() {
     e.preventDefault()
     if (isAble()) {
       await register({ name, email, password, surname })
-      window.location.href = '/'
+      const msg = `Agora você faz parte da plataforma da Proffy. Tenha uma ótima experiência.`
+      window.location.href = `/notify?title=Cadastro&msg=${msg}&url=/&text=Página Inicial`
     }
   }
 

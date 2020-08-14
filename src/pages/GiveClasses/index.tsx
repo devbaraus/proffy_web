@@ -158,7 +158,7 @@ function GiveClasses() {
             emitMessage('Você não tem permissão para acessar essa página.')
             history.push('/')
           } else if (error.response.status === 404) {
-            emitMessage('O conteúdo desta página não foi encontrado.')
+            emitMessage('O conteúdo desta página não foi encontrado.', 'error')
             history.push('/')
           }
         })
@@ -178,6 +178,7 @@ function GiveClasses() {
             setScheduleItems(classItem.schedules)
           })
           .catch(() => {
+            emitMessage('O conteúdo desta página não foi encontrado.', 'error')
             history.push('/give-classes')
           })
       }

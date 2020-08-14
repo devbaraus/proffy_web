@@ -1,12 +1,15 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState, useContext } from 'react'
 import Input from '../../components/Input'
 import WrapperContent from '../../components/WrapperContent'
 import LogoContainer from '../../components/LogoContainer'
 import './styles.scss'
 import { useLocation, useHistory } from 'react-router-dom'
 import api from '../../services/api'
+import { AuthContext } from '../../contexts/auth'
 
 function ResetPassword() {
+  const { emitMessage } = useContext(AuthContext)
+
   function useQuery() {
     return new URLSearchParams(useLocation().search)
   }
@@ -28,7 +31,7 @@ function ResetPassword() {
         )
       })
     } else {
-      window.alert('As senhas não são iguais.')
+      emitMessage("Suas senhas não batem.", 'error')
     }
   }
 

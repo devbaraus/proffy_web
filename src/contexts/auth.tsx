@@ -123,8 +123,15 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         localStorage.getItem('@proffy:refresh_token') as string,
       )
 
-      if (refresh_token && storedToken) {
+      if (
+        typeof refresh_token != 'undefined' &&
+        refresh_token != null &&
+        typeof storedToken != 'undefined' &&
+        storedToken != null
+      ) {
         signIn({ email: '', password: '', refresh_token })
+      } else {
+        signOut()
       }
     },
     // eslint-disable-next-line

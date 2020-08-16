@@ -33,7 +33,7 @@ function GiveClasses() {
 
   function validForm() {
     if (subject === '') return false
-    if (cost === '') return false
+    if (cost === '' || Number(cost) < 0) return false
     if (summary === '') return false
     for (let index in scheduleItems) {
       let scheduleItem = scheduleItems[index]
@@ -74,7 +74,7 @@ function GiveClasses() {
       api
         .post('classes', {
           subject_id: subject,
-          cost: Number(cost),
+          cost: Math.abs(Number(cost)),
           summary,
           schedule: scheduleItems,
         })
@@ -90,7 +90,7 @@ function GiveClasses() {
         .put('classes', {
           id: classID,
           subject_id: subject,
-          cost: Number(cost),
+          cost: Math.abs(Number(cost)),
           summary,
           schedule: scheduleItems,
         })
@@ -250,9 +250,13 @@ function GiveClasses() {
                 <Input
                   label="Custo da sua hora por aula"
                   name="cost"
+                  min="0"
+                  type="number"
                   value={cost}
                   required
-                  onChange={(e) => setCost(e.target.value)}
+                  onChange={(e) => {
+                    setCost(e.target.value);
+                  }}
                 />
               </div>
             </div>

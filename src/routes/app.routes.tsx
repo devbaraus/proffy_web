@@ -7,6 +7,7 @@ import GiveClasses from '../pages/GiveClasses'
 import Notify from '../pages/Notify'
 import TeacherProfile from '../pages/Profile'
 
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function AppRoutes() {
       <Route path="/profile" component={TeacherProfile} />
       <Route path="/notify" component={Notify} />
       {/*<Redirect path="*" to="/" />*/}
+
     </BrowserRouter>
   )
 }

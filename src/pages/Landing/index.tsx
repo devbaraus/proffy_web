@@ -8,6 +8,7 @@ import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg'
 import api from '../../services/api'
 import './styles.scss'
 import TopBarContainer from '../../components/TopBarContainer'
+import Promote from "../../components/Promote";
 
 function Landing() {
   const [totalConnections, setTotalConnections] = useState(0)
@@ -20,34 +21,38 @@ function Landing() {
   }, [])
 
   return (
-    <div id="page-landing">
-      <TopBarContainer profile={true} />
-      <div id="page-landing-content" className="container">
-        <LogoContainer background={false} />
+    <div>
+      <div id="page-landing">
+        <TopBarContainer profile={true} />
+        <div id="page-landing-content" className="container">
+          <LogoContainer background={false} />
 
-        <img
-          src={landingImg}
-          alt="Plataforma de estudos"
-          className="hero-image"
-        />
+          <img
+            src={landingImg}
+            alt="Plataforma de estudos"
+            className="hero-image"
+          />
 
-        <div className="buttons-container">
-          <Link to="/study" className="study">
-            <img src={studyIcon} alt="Estudar" />
-            Estudar
-          </Link>
-          <Link to="give-classes" className="give-classes">
-            <img src={giveClassesIcon} alt="Estudar" />
-            Dar Aulas
-          </Link>
-        </div>
+          <div className="buttons-container">
+            <Link to="/study" className="study">
+              <img src={studyIcon} alt="Estudar" />
+              Estudar
+            </Link>
+            <Link to="give-classes" className="give-classes">
+              <img src={giveClassesIcon} alt="Estudar" />
+              Dar Aulas
+            </Link>
+          </div>
 
-        <span className="total-connections">
+          <span className="total-connections">
           Total de {totalConnections} conexões já realizadas{' '}
-          <img src={purpleHeartIcon} alt="Coração Roxo" />
+            <img src={purpleHeartIcon} alt="Coração Roxo" />
         </span>
+        </div>
       </div>
+      <Promote dark={true}/>
     </div>
+
   )
 }
 

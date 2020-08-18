@@ -6,6 +6,7 @@ import Input from '../../components/Input'
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg'
 import { AuthContext } from '../../contexts/auth'
 import './styles.scss'
+import Promote from "../../components/Promote";
 
 function Login() {
   const { signIn } = useContext(AuthContext)

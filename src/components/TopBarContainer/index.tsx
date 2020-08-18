@@ -10,11 +10,13 @@ import { AuthContext } from '../../contexts/auth'
 interface TopBarContainerProps {
   profile?: boolean
   title?: string
+  transparent?: boolean
 }
 
 const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
   profile = false,
   title,
+  transparent= false
 }) => {
   const { signOut, user } = useContext(AuthContext)
 
@@ -23,7 +25,7 @@ const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
   }
 
   return (
-    <div className={`holder-top-bar ${!profile && 'holder-dark'}`}>
+    <div className={`holder-top-bar ${!profile || transparent && 'holder-dark'}`}>
       {profile ? (
         <div className="top-bar-container">
           <Link to="/profile" className="profile-button">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import doneIcon from '../../assets/images/icons/done.svg'
 import backgroundImg from '../../assets/images/success-background.svg'
 import './styles.scss'
+import Promote from "../Promote";
 
 const pageFullBackgroundStyle = {
   backgroundImage: `url(${backgroundImg})`,
@@ -40,6 +41,7 @@ const FullContent: React.FunctionComponent<FullContentProps> = ({
 
         </div>
       </div>
+      <Promote dark={true}/>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import api from '../../services/api'
 import './styles.scss'
 import ClassItem from '../../components/ClassItem'
 import { ClassItemInterace, SubjectInterface } from '../../interfaces'
+import Promote from "../../components/Promote";
 
 function Study() {
   const [classes, setClasses] = useState([])
@@ -50,55 +51,60 @@ function Study() {
   )
 
   return (
-    <div id="page-teacher-list" className="container">
-      <PageHeader page="Estudar" title="Estes são os proffys disponíveis.">
-        <form id="search-teachers">
-          <Select
-            label="Matéria"
-            name="subject"
-            options={storedSubjects.map((subject) => {
-              return {
-                value: subject.id,
-                label: subject.name,
-              }
-            })}
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-          />
-          <Select
-            label="Dia da Semana"
-            name="week_day"
-            options={[
-              { value: 0, label: 'Domingo' },
-              { value: 1, label: 'Segunda-feira' },
-              { value: 2, label: 'Terça-feira' },
-              { value: 3, label: 'Quarta-feira' },
-              { value: 4, label: 'Quinta-feira' },
-              { value: 5, label: 'Sexta-feira' },
-              { value: 6, label: 'Sábado' },
-            ]}
-            value={week_day}
-            onChange={(e) => setWeekDay(e.target.value)}
-          />
-          <Input
-            label="Hora"
-            name="time"
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </form>
-      </PageHeader>
+    <div>
+      <div id="page-teacher-list" className="container">
+        <PageHeader page="Estudar" title="Estes são os proffys disponíveis.">
+          <form id="search-teachers">
+            <Select
+              label="Matéria"
+              name="subject"
+              options={storedSubjects.map((subject) => {
+                return {
+                  value: subject.id,
+                  label: subject.name,
+                }
+              })}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+            />
+            <Select
+              label="Dia da Semana"
+              name="week_day"
+              options={[
+                { value: 0, label: 'Domingo' },
+                { value: 1, label: 'Segunda-feira' },
+                { value: 2, label: 'Terça-feira' },
+                { value: 3, label: 'Quarta-feira' },
+                { value: 4, label: 'Quinta-feira' },
+                { value: 5, label: 'Sexta-feira' },
+                { value: 6, label: 'Sábado' },
+              ]}
+              value={week_day}
+              onChange={(e) => setWeekDay(e.target.value)}
+            />
+            <Input
+              label="Hora"
+              name="time"
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+          </form>
+        </PageHeader>
 
-      <main>
-        {classes.map((classItem: ClassItemInterace) => (
-          <ClassItem
-            classesLabel={storedSubjects}
-            key={classItem.id}
-            classItem={classItem}
-          />
-        ))}
-      </main>
+        <main>
+          {classes.map((classItem: ClassItemInterace) => (
+            <ClassItem
+              classesLabel={storedSubjects}
+              key={classItem.id}
+              classItem={classItem}
+            />
+          ))}
+        </main>
+        <Promote/>
+
+      </div>
+
     </div>
   )
 }

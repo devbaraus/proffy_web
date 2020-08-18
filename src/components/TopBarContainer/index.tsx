@@ -25,7 +25,7 @@ const TopBarContainer: React.FunctionComponent<TopBarContainerProps> = ({
   }
 
   return (
-    <div className={`holder-top-bar ${!profile || transparent && 'holder-dark'}`}>
+    <div className={`holder-top-bar ${!profile || (transparent && 'holder-dark')}`}>
       {profile ? (
         <div className="top-bar-container">
           <Link to="/profile" className="profile-button">

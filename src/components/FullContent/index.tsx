@@ -11,6 +11,7 @@ const pageFullBackgroundStyle = {
 interface FullContentProps {
   className?: string
   title: string
+  disabled?: boolean
   message: string
   link: {
     url: string
@@ -21,6 +22,7 @@ interface FullContentProps {
 const FullContent: React.FunctionComponent<FullContentProps> = ({
   title,
   message,
+  disabled = false,
   link,
   className,
 }) => {
@@ -32,8 +34,10 @@ const FullContent: React.FunctionComponent<FullContentProps> = ({
           <img src={doneIcon} alt="" />
           <h2>{title}</h2>
           <p>{message}</p>
+          {
+            !disabled ? <Link to={link.url}>{link.text}</Link> : <span></span>
+          }
 
-          <Link to={link.url}>{link.text}</Link>
         </div>
       </div>
     </div>

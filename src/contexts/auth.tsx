@@ -85,7 +85,6 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         api.defaults.headers['Authorization'] = `Bearer ${token}`
       })
       .catch(() => {
-        console.log('oidawdw', params)
         signOut()
       })
   }
@@ -104,10 +103,10 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     name: string
     surname: string
   }) {
-    const response = (await auth.register(params)).data
-
-    setLocalToken(response.token, response.refresh_token)
-    setLocalUser(response.user)
+    await auth.register(params)
+    return
+    // setLocalToken(response.token, response.refresh_token)
+    // setLocalUser(response.user)
   }
 
   function emitMessage(text: string, type: string = 'success', time?: number) {
@@ -127,7 +126,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         '@proffy:refresh_token',
       ) as string
 
-      if (typeof refresh_token === 'undefined' || refresh_token === null) {
+      if (typeof refresh_token === 'undefined' || refresh_token === 'null' || refresh_token === '') {
         signOut()
       } else {
         refresh_token = JSON.parse(refresh_token)

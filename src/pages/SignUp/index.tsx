@@ -16,9 +16,10 @@ function SignUp() {
   async function handleCreateUser(e: FormEvent) {
     e.preventDefault()
     if (isAble()) {
+      console.log(password)
       await register({ name, email, password, surname })
-      const msg = `Agora você faz parte da plataforma da Proffy. Tenha uma ótima experiência.`
-      window.location.href = `/notify?title=Cadastro&msg=${msg}&url=/&text=Página Inicial`
+      const msg = `Agora você faz parte da plataforma da Proffy. Mas antes é nessário que você valide sua conta. Enviamos um token para seu e-mail!`
+      window.location.href = `/notify?title=Valide sua conta&msg=${msg}&url=/&text=Página Inicial`
     }
   }
 

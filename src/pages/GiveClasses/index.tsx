@@ -9,7 +9,6 @@ import './styles.scss'
 import Textarea from '../../components/Textarea'
 import { ScheduleInterface, SubjectInterface } from '../../interfaces'
 import { AuthContext } from '../../contexts/auth'
-import Promote from "../../components/Promote";
 
 function GiveClasses() {
   const history = useHistory()
@@ -362,7 +361,6 @@ function GiveClasses() {
           </footer>
         </form>
       </main>
-      <Promote/>
     </div>
   )
 }

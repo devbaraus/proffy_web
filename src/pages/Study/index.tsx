@@ -6,7 +6,6 @@ import api from '../../services/api'
 import './styles.scss'
 import ClassItem from '../../components/ClassItem'
 import { ClassItemInterace, SubjectInterface } from '../../interfaces'
-import Promote from "../../components/Promote";
 
 function Study() {
   const [classes, setClasses] = useState([])
@@ -101,7 +100,6 @@ function Study() {
             />
           ))}
         </main>
-        <Promote/>
 
       </div>
 

@@ -8,7 +8,6 @@ import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg'
 import api from '../../services/api'
 import './styles.scss'
 import TopBarContainer from '../../components/TopBarContainer'
-import Promote from "../../components/Promote";
 
 function Landing() {
   const [totalConnections, setTotalConnections] = useState(0)
@@ -50,7 +49,6 @@ function Landing() {
         </span>
         </div>
       </div>
-      <Promote dark={true}/>
     </div>
 
   )

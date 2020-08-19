@@ -12,7 +12,6 @@ import { AuthContext } from '../../contexts/auth'
 import api from '../../services/api'
 import { ClassItemInterace, SubjectInterface } from '../../interfaces'
 import ProfileClassItem from '../../components/ProfileClassItem'
-import Promote from "../../components/Promote";
 
 function Profile() {
   const { setLocalUser, emitMessage } = useContext(AuthContext)
@@ -194,7 +193,6 @@ function Profile() {
           </fieldset>
         </form>
       </main>
-      <Promote/>
     </div>
   )
 }

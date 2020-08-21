@@ -1,6 +1,24 @@
 <p align="center">
-  <img src="./src/assets/images/purple-logo.svg" alt="Purple Proffy Logo" />
+  <img src="./src/assets/images/purple-logo.svg" alt="Purple Proffy Logo" width="386px" />
 </p>
+
+<p align="center">	
+   <a href="https://www.linkedin.com/in/devbaraus/">
+      <img alt="Bruno de Araujo" src="https://img.shields.io/badge/-devbaraus-8257E5?style=flat&logo=Linkedin&logoColor=white" />
+   </a>
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/devbaraus/proffy_web?color=#8257E5">
+  <a href="https://github.com/devbaraus/proffy_web/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/devbaraus/proffy_web?color=#8257E5">
+  </a> 
+  <a href="https://github.com/devbaraus/proffy_web/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/devbaraus/proffy_web?color=8257E5&logo=github">
+  </a>
+  <a href="https://app.netlify.com/sites/wizardly-lalande-b063e6/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/30d7053b-7ee0-4950-b391-ae6799efea2d/deploy-status" title="Proffy Netlify Status">
+  </a>
+</p>
+
+---
 
 > :rocket: Project made to connect students to teacher
 
@@ -35,4 +53,3 @@ The idea behind Proffy is to connect people that want to study to people that wa
 - Install dependencies `npm/yarn install`
 - Execute script `npm/yarn start`
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/30d7053b-7ee0-4950-b391-ae6799efea2d/deploy-status)](https://app.netlify.com/sites/wizardly-lalande-b063e6/deploys)

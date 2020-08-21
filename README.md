@@ -19,10 +19,10 @@
 > :rocket: Project made to connect students to teacher
 
 ## Table of contents
-[What is it?](#what-is-it%3F)
-[Technologies](#technologies)
-[Features](#features)
-[How to run?](#how-to-run%3F)
+- [What is it?](#what-is-it%3F)
+- [Technologies](#technologies)
+- [Features](#features)
+- [How to run?](#how-to-run%3F)
 
 
 ### What is it?

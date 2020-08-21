@@ -26,7 +26,7 @@ The idea behind Proffy is to connect people that want to study to people that wa
 
 ### How to run
 
-> If you want you can just live test on: `[proffy.baraus.dev](https://proffy.baraus.dev)`
+> If you want you can just live test on: [proffy.baraus.dev](https://proffy.baraus.dev)
 
 - Clone the repository `https://github.com/devbaraus/proffy_web`
 - Get in the folder `cd proffy_web`

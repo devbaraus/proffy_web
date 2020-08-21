@@ -1,4 +1,6 @@
-# PROFFY
+<p align="center">
+  <img src="./src/assets/images/purple-logo.svg" alt="Purple Proffy Logo" />
+</p>
 
 > :rocket: Project made to connect students to teacher
 

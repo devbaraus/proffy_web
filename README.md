@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/assets/images/purple-logo.svg" alt="Purple Proffy Logo" width="386px" />
+  <img src="https://raw.githubusercontent.com/devbaraus/proffy_web/master/src/assets/images/purple-logo.svg" alt="Purple Proffy Logo" width="386px" />
 </p>
 
 <p align="center">	

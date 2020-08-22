@@ -32,8 +32,8 @@ The idea behind Proffy is to connect people that want to study to people that wa
 
 ### Technologies
 - TypeScript
-- JavaScritpt
 - ReactJS
+- JWT
 - [Web API](https://github.com/devbaraus/proffy_server) (Another repo)
 
 ### Features

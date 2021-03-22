@@ -53,3 +53,5 @@ The idea behind Proffy is to connect people that want to study to people that wa
 - Install dependencies `npm/yarn install`
 - Execute script `npm/yarn start`
 
+---
+Enjoy!
